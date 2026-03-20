@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nagadevi Koppadi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --cream: #ffffff;
+    --sage: #0d0d0d;
+    --rust: #4a3f35;
+    --mist: #f5efe6;
+    --gold: #b8996e;
+    --text-muted: #6b6258;
+    --border: #e2d9cc;
+    --beige: #f5efe6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #ffffff;
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; letter-spacing: 0.04em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none; transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 6rem 6rem; position: relative;
+  }
+  .hero-left::after {
+    content: ''; position: absolute; right: 0; top: 15%; bottom: 15%;
+    width: 1px; background: var(--border);
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--rust); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 30px; height: 1px; background: var(--rust); display: block;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 1.05; color: var(--ink); margin-bottom: 0.3rem;
+  }
+  .hero-name em { font-style: italic; color: var(--sage); }
+  .hero-title {
+    font-size: 1rem; color: var(--text-muted);
+    margin-bottom: 2rem; font-weight: 400; letter-spacing: 0.03em;
+  }
+  .hero-desc {
+    font-size: 0.95rem; color: #444;
+    max-width: 420px; margin-bottom: 2.8rem; line-height: 1.8;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px;
+    transition: all .25s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--ink); color: #fff; }
+  .btn-primary:hover { background: var(--rust); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: #fff; }
+
+  .hero-right {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 5rem; background: #f5efe6;
+    position: relative; overflow: hidden;
+  }
+  .hero-right::before {
+    content: 'NK'; position: absolute; bottom: -2rem; right: -1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 18rem; font-weight: 700;
+    color: rgba(0,0,0,0.04); line-height: 1; pointer-events: none;
+  }
+  .quick-info { display: flex; flex-direction: column; gap: 2rem; }
+  .info-item { border-left: 2px solid var(--sage); padding-left: 1.2rem; }
+  .info-label {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 0.3rem;
+  }
+  .info-value { font-size: 0.95rem; color: var(--ink); font-weight: 500; }
+
+  /* SECTION BASE */
+  section { padding: 6rem 6rem; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem; color: var(--rust); letter-spacing: 0.15em;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--ink);
+  }
+  .section-line { flex: 1; height: 1px; background: var(--border); margin-left: 1rem; }
+
+  /* ABOUT */
+  #about { background: #0d0d0d; color: #ffffff; }
+  #about .section-title { color: #ffffff; }
+  #about .section-line { background: rgba(255,255,255,0.15); }
+  #about .section-num { color: var(--gold); }
+  .about-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 5rem; align-items: start;
+  }
+  .about-text p { font-size: 1rem; line-height: 1.9; color: #c8c8c8; margin-bottom: 1.2rem; }
+  .about-text p strong { color: #ffffff; font-weight: 500; }
+  .about-stats { display: flex; flex-direction: column; gap: 2.5rem; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; color: var(--gold); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: #999; margin-top: 0.3rem;
+  }
+
+  /* SKILLS */
+  #skills { background: #ffffff; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .skill-card {
+    border: 1px solid var(--border); padding: 2rem;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+    background: #fff;
+  }
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+    border-color: var(--ink);
+  }
+  .skill-card-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+  .skill-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--ink);
+  }
+  .skill-card-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+  .tag {
+    font-size: 0.72rem; letter-spacing: 0.06em;
+    padding: 0.25rem 0.7rem;
+    background: var(--beige); color: var(--ink);
+    border-radius: 20px; border: 1px solid var(--border);
+  }
+
+  /* PROJECTS */
+  #projects { background: #f5efe6; }
+  .projects-list { display: flex; flex-direction: column; gap: 2.5rem; }
+  .project-card {
+    display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; gap: 2rem; padding: 2rem 2.5rem;
+    background: #ffffff; border: 1px solid var(--border);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .project-card:hover {
+    transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  }
+  .project-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; color: var(--border); font-style: italic; min-width: 2rem;
+  }
+  .project-info h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.4rem;
+  }
+  .project-info p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+
+  /* CERTIFICATIONS */
+  #certifications { background: #ffffff; }
+  .certs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .cert-card {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.5rem; border: 1px solid var(--border);
+    background: #fff; transition: border-color .25s;
+  }
+  .cert-card:hover { border-color: var(--ink); }
+  .cert-icon {
+    width: 42px; height: 42px; background: var(--beige);
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+  }
+  .cert-info h4 { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.2rem; }
+  .cert-info span { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* EDUCATION */
+  #education { background: #0d0d0d; color: #ffffff; }
+  #education .section-title { color: #ffffff; }
+  #education .section-line { background: rgba(255,255,255,0.15); }
+  #education .section-num { color: var(--gold); }
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 3rem; padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-date {
+    font-size: 0.78rem; color: var(--gold); letter-spacing: 0.1em; padding-top: 0.3rem;
+  }
+  .timeline-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; margin-bottom: 0.25rem; color: #ffffff;
+  }
+  .timeline-content p { font-size: 0.88rem; color: #aaa; margin-bottom: 0.2rem; }
+
+  /* CONTACT */
+  #contact {
+    background: #f5efe6; text-align: center;
+    color: #0d0d0d; padding: 8rem 6rem;
+  }
+  #contact .section-num { color: #a09080; }
+  #contact .section-title { color: #0d0d0d; font-size: 3rem; }
+  #contact .section-header { justify-content: center; }
+  #contact .section-line { background: #e2d9cc; }
+  .contact-sub {
+    font-size: 1rem; color: #6b6258;
+    max-width: 500px; margin: 0 auto 3rem;
+  }
+  .contact-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+  .contact-chip {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.7rem 1.6rem; border: 1px solid #0d0d0d;
+    color: #0d0d0d; text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.08em;
+    transition: background .25s, color .25s; border-radius: 2px;
+  }
+  .contact-chip:hover { background: #0d0d0d; color: #ffffff; }
+
+  /* FOOTER */
+  footer {
+    background: #0d0d0d; padding: 2rem 6rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  footer p { font-size: 0.78rem; color: #555; }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 6rem 2rem 3rem; }
+    .hero-left::after { display: none; }
+    .hero-right { padding: 3rem 2rem; }
+    section { padding: 4rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-num { display: none; }
+    .certs-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+  @media(max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Nagadevi K.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Python Full Stack Developer</div>
+    <h1 class="hero-name">Nagadevi<br/><em>Koppadi</em></h1>
+    <p class="hero-title">React · Django · Flask · Machine Learning</p>
+    <p class="hero-desc">
+      A 2025 IT graduate with a passion for building intelligent, user-focused digital solutions — combining data-driven insights with modern web technologies.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="mailto:koppadinagadevi@gmail.com" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="quick-info">
+      <div class="info-item">
+        <div class="info-label">Location</div>
+        <div class="info-value">Greater Hyderabad Area, India</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Degree</div>
+        <div class="info-value">B.Tech Information Technology — 2025</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Interests</div>
+        <div class="info-value">Web Dev · Machine Learning · Generative AI · Cybersecurity</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Status</div>
+        <div class="info-value" style="font-weight:600;">Open to Opportunities ✦</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid fade-up">
+    <div class="about-text">
+      <p>I am a <strong>2025 B.Tech IT graduate</strong> from Swarnandhra College of Engineering & Technology, passionate about building intelligent and user-focused digital solutions. I sit at the intersection of <strong>data science</strong> and <strong>modern web development</strong>.</p>
+      <p>Skilled in Python and JavaScript, I enjoy combining data-driven insights with clean frontend experiences. My academic journey has taken me through machine learning model building, full-stack web projects, and hands-on simulations with industry leaders like Deloitte and Accenture.</p>
+      <p>I bring knowledge in <strong>Software Testing, SDLC/STLC, Test Automation with Selenium, Agile Methodology</strong> and a deep curiosity for emerging technologies including <strong>Generative AI and Cybersecurity</strong>. I am actively seeking software engineering roles where I can learn, contribute, and grow.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Industry Certifications</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Academic Projects Built</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2025</div>
+        <div class="stat-label">B.Tech IT Graduate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skills & Expertise</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fade-up" style="transition-delay:.05s">
+      <div class="skill-card-icon">🐍</div>
+      <div class="skill-card-title">Backend Development</div>
+      <p class="skill-card-desc">Building RESTful APIs and full-stack apps with Python-powered frameworks.</p>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">Django</span><span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">REST API</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:.1s">
+      <div class="skill-card-icon">⚛️</div>
+      <div class="skill-card-title">Frontend Development</div>
+      <p class="skill-card-desc">Creating responsive, interactive UIs with modern JavaScript and React.</p>
+      <div class="skill-tags">
+        <span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:.15s">
+      <div class="skill-card-icon">🤖</div>
+      <div class="skill-card-title">Machine Learning & AI</div>
+      <p class="skill-card-desc">Building predictive models, feature extraction pipelines, and data-driven solutions.</p>
+      <div class="skill-tags">
+        <span class="tag">ML with Python</span><span class="tag">Data Analysis</span><span class="tag">Feature Extraction</span><span class="tag">Gen AI</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:.2s">
+      <div class="skill-card-icon">🧪</div>
+      <div class="skill-card-title">Software Testing</div>
+      <p class="skill-card-desc">Ensuring software quality through structured test design and automation tools.</p>
+      <div class="skill-tags">
+        <span class="tag">Selenium</span><span class="tag">SDLC</span><span class="tag">STLC</span><span class="tag">Bug Tracking</span><span class="tag">Agile</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:.25s">
+      <div class="skill-card-icon">🔐</div>
+      <div class="skill-card-title">Cybersecurity</div>
+      <p class="skill-card-desc">Understanding zero trust principles and modern security frameworks.</p>
+      <div class="skill-tags">
+        <span class="tag">Zero Trust (ZTCA)</span><span class="tag">Security Fundamentals</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:.3s">
+      <div class="skill-card-icon">📊</div>
+      <div class="skill-card-title">Data Analytics</div>
+      <p class="skill-card-desc">Extracting insights from data with industry-standard workflows and tools.</p>
+      <div class="skill-tags">
+        <span class="tag">Data Analytics</span><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">C</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-list">
+    <div class="project-card fade-up">
+      <div class="project-num">01</div>
+      <div class="project-info">
+        <h3>ML-Powered Prediction System</h3>
+        <p>Designed and developed a machine learning pipeline for predictive analysis, incorporating feature extraction, model training, and evaluation — combining Python ML libraries with a clean web interface.</p>
+      </div>
+      <div class="project-stack">
+        <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Flask</span><span class="tag">MySQL</span>
+      </div>
+    </div>
+    <div class="project-card fade-up" style="transition-delay:.1s">
+      <div class="project-num">02</div>
+      <div class="project-info">
+        <h3>Full Stack Web Application</h3>
+        <p>Built a multi-page full stack application using Django on the backend and React on the frontend, featuring user authentication, CRUD operations, and a responsive interface.</p>
+      </div>
+      <div class="project-stack">
+        <span class="tag">React</span><span class="tag">Django</span><span class="tag">REST API</span><span class="tag">MySQL</span>
+      </div>
+    </div>
+    <div class="project-card fade-up" style="transition-delay:.2s">
+      <div class="project-num">03</div>
+      <div class="project-info">
+        <h3>Data Analytics Dashboard</h3>
+        <p>Developed an analytics dashboard as part of the Deloitte job simulation, analyzing real-world datasets and presenting findings through interactive visualizations and summary reports.</p>
+      </div>
+      <div class="project-stack">
+        <span class="tag">Python</span><span class="tag">Data Analysis</span><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card fade-up">
+      <div class="cert-icon">📈</div>
+      <div class="cert-info">
+        <h4>Deloitte Australia — Data Analytics Job Simulation</h4>
+        <span>Deloitte · Forage Platform</span>
+      </div>
+    </div>
+    <div class="cert-card fade-up" style="transition-delay:.07s">
+      <div class="cert-icon">🐍</div>
+      <div class="cert-info">
+        <h4>edX Verified Certificate — Python Basics for Data Science</h4>
+        <span>edX · IBM</span>
+      </div>
+    </div>
+    <div class="cert-card fade-up" style="transition-delay:.14s">
+      <div class="cert-icon">💻</div>
+      <div class="cert-info">
+        <h4>Accenture UK — Developer & Technology Job Simulation</h4>
+        <span>Accenture · Forage Platform</span>
+      </div>
+    </div>
+    <div class="cert-card fade-up" style="transition-delay:.21s">
+      <div class="cert-icon">🔐</div>
+      <div class="cert-info">
+        <h4>Zero Trust Certified Associate (ZTCA)</h4>
+        <span>Zero Trust Security Certification</span>
+      </div>
+    </div>
+    <div class="cert-card fade-up" style="transition-delay:.28s">
+      <div class="cert-icon">📊</div>
+      <div class="cert-info">
+        <h4>Deloitte Australia — Data Analytics (Second Simulation)</h4>
+        <span>Deloitte · Forage Platform</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-up">
+      <div class="timeline-date">Nov 2021 – May 2025</div>
+      <div class="timeline-content">
+        <h3>B.Tech — Information Technology</h3>
+        <p>Swarnandhra College of Engineering & Technology, Narasapur</p>
+        <p style="color:#666;font-size:0.82rem;margin-top:0.4rem">Focus: Software Development · Machine Learning · Data Science · Cybersecurity</p>
+      </div>
+    </div>
+    <div class="timeline-item fade-up" style="transition-delay:.1s">
+      <div class="timeline-date">Jun 2019 – Mar 2021</div>
+      <div class="timeline-content">
+        <h3>Board of Intermediate Education (BOI)</h3>
+        <p>Aditya Corporation</p>
+      </div>
+    </div>
+    <div class="timeline-item fade-up" style="transition-delay:.2s">
+      <div class="timeline-date">Jun 2018 – Mar 2019</div>
+      <div class="timeline-content">
+        <h3>SSC — Secondary School Certificate</h3>
+        <p>Sri Vasista English Medium School</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header" style="justify-content:center;">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="contact-sub">I'm actively looking for software engineering opportunities. Whether you have a role, a project, or just want to say hello — my inbox is open.</p>
+  <div class="contact-links">
+    <a href="mailto:koppadinagadevi@gmail.com" class="contact-chip">
+      ✉️ koppadinagadevi@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/nagadevikoppadi-22aa15265" target="_blank" class="contact-chip">
+      💼 LinkedIn Profile
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Nagadevi Koppadi. All rights reserved.</p>
+  <p>Built with HTML · CSS · JavaScript</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? '#4a3f35' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
